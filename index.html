@@ -606,43 +606,6 @@
 <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
 <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
 <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
-<!--<iframe src="https://pteacher.github.io/barsik-ai/" title="HIVAWIDGET" width="122" height="172" style="position: fixed; bottom: 30px; left: 20px; border-radius: 20px; border: 4px solid #fff;" allowtransparency scrolling="no" seamless allow="microphone">-->
-    <iframe id="widget-app" src="https://pteacher.github.io/barsik-ai/" title="HIVAWIDGET" width="120" height="170" style="position: fixed; bottom: 0;" allowtransparency scrolling="no" seamless allow="microphone"></iframe>
-    <script>
-        let widgetApp = document.getElementById('widget-app');
-        let openWidget = false;
-
-        widgetApp.addEventListener('load', function() {
-            console.log('Виджет загрузился');
-            // Получеаем контент iframe
-            const iframeContentWindow = widgetApp.contentWindow;
-            const iframeDocument = iframeContentWindow.document;
-
-            // Ищем канвас
-            const canvas = iframeDocument.querySelector('canvas');
-
-            // Вешаем событие на канвас
-            canvas.addEventListener('click', function(event) {
-                console.log('Клик сработал');
-                event.stopPropagation();
-            });
-        });
-
-        // Добавляем событие на сам фрейм
-        widgetApp.addEventListener('click', function(event) {
-            if (!openWidget) {
-                widgetApp.width = "270px";
-                widgetApp.height = "500px";
-                openWidget = true;
-            } else {
-                widgetApp.width = "120px";
-                widgetApp.height = "170px";
-                openWidget = false;
-            }
-
-            widgetApp.contentWindow.document.body.style.width = widgetApp.width;
-            widgetApp.contentWindow.document.body.style.height = widgetApp.height;
-        });
-    </script>
+<iframe src="https://pteacher.github.io/barsik-ai/" title="HIVAWIDGET" width="122" height="172" style="position: fixed; bottom: 30px; left: 20px; border-radius: 20px; border: 4px solid #fff;" allowtransparency scrolling="no" seamless allow="microphone">
 </body>
 </html>
