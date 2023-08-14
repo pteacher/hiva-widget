@@ -779,19 +779,16 @@
 
         widgetApp.addEventListener('load', function() {
             console.log('Виджет загрузился');
-            // Получеаем контент iframe
             const iframeContentWindow = widgetApp.contentWindow;
             const iframeDocument = iframeContentWindow.document;
-
-            // Ищем канвас
             const canvas = iframeDocument.querySelector('canvas');
 
-            // Вешаем событие на канвас
             canvas.addEventListener('click', function(event) {
                 if (!openWidget) {
                     widgetApp.width = "270px";
                     widgetApp.height = "500px";
                     openWidget = true;
+                    widgetApp.contentWindow.sayHello();
                 } else {
                     widgetApp.width = "120px";
                     widgetApp.height = "170px";
