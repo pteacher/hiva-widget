@@ -10947,7 +10947,7 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: #fff;
-  background: linear-gradient( #999999, #7d7d7d ), url("../assets/img/header-bg.jpg");
+  background-image: url("../assets/img/header-bg.jpg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -10967,6 +10967,36 @@ header.masthead .masthead-heading {
   line-height: 3.25rem;
   margin-bottom: 2rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+.darken-overlay div {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.darken-pseudo {
+  position: relative;
+}
+
+.darken-pseudo:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.darken-with-text div {
+  font-size: 2em;
+  text-align: center;
+  color: white;
+
+  position: relative;
+  z-index: 1;
 }
 
 @media (min-width: 768px) {
@@ -11314,4 +11344,102 @@ section#contact form#contactForm :-ms-input-placeholder {
   text-align: center;
   font-size: 0.9rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+h1{
+  width:100%;
+  font-size: 40px;
+  font-family: arial;
+  text-align: center;
+  margin-top: 40px;
+  position: absolute;
+  top: 0;
+}
+
+.bg-box {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.share-btn {
+  padding: 25px;
+  background-color: #eee;
+  position: relative;
+  border-radius: 50px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.share-btn:hover {
+  transform: scale(1.1);
+}
+
+.text-share-btn {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50px;
+  font-family: arial;
+  font-size: 24px;
+  transition: 1s 0.2s;
+  z-index: 99999;
+}
+
+.share-btn:hover .text-share-btn {
+  left: -100%;
+}
+
+.share-items {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  font-size: 30px;
+  padding: 0;
+}
+
+.share-items li {
+  padding: 0 17px;
+
+}
+
+.share-items li a {
+  color: #000;
+  display: inline-block;
+  transform: scale(0);
+}
+
+.share-btn:hover ul li a {
+  transform: scale(1);
+}
+
+.share-items li:nth-child(5) a {
+  transition: 0.5s 0.3s;
+}
+
+.share-items li:nth-child(4) a {
+  transition: 0.5s 0.45s;
+}
+
+.share-items li:nth-child(3) a {
+  transition: 0.5s 0.6s;
+}
+
+.share-items li:nth-child(2) a {
+  transition: 0.5s 0.75s;
+}
+
+.share-items li:nth-child(1) a {
+  transition: 0.5s 0.9s;
 }
