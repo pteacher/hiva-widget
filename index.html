@@ -820,7 +820,7 @@
             offsetY = event.clientY - widgetApp.getBoundingClientRect().top;
         });
 
-        canvas.addEventListener('mousemove', function (event) {
+        document.addEventListener('mousemove', function (event) {
             console.log('Перетаскивание элемента');
             if (isDragging && !openWidget) {
                 console.log('Сработало условие');
@@ -830,7 +830,7 @@
             }
         });
 
-        canvas.addEventListener('mouseup', function () {
+        document.addEventListener('mouseup', function () {
             isDragging = false;
             console.log('Произошло отпущение элемента');
         });
