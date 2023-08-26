@@ -819,11 +819,13 @@
                 widgetApp.height = "500px";
                 openWidget = true;
                 widgetApp.contentWindow.sayHello();
+                widgetApp.contentWindow.blackBackground();
             } else {
                 widgetApp.width = "120px";
                 widgetApp.height = "170px";
                 openWidget = false;
                 widgetApp.contentWindow.stopRecognize();
+                widgetApp.contentWindow.noneBackground();
             }
 
             widgetApp.contentWindow.document.body.style.width = widgetApp.width;
@@ -835,6 +837,7 @@
 
     // Проверка, что скрипт выполняется на компьютере (не на мобильном устройстве)
     if (!/Mobi|Android/i.test(navigator.userAgent)) {
+        console.log('loaded drag and drop')
         let widgetContainer = document.querySelector('.widget-container');
         let isDragging = false;
 
