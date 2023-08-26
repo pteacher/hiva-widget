@@ -813,7 +813,7 @@
         const iframeDocument = iframeContentWindow.document;
         const canvas = iframeDocument.querySelector('canvas');
 
-        canvas.addEventListener('mousedown', function (event) {
+        /*canvas.addEventListener('mousedown', function (event) {
             isDragging = true;
             console.log('Произошло нажатие');
             offsetX = event.clientX - widgetApp.getBoundingClientRect().left;
@@ -833,7 +833,7 @@
         document.addEventListener('mouseup', function () {
             isDragging = false;
             console.log('Произошло отпущение элемента');
-        });
+        });*/
 
         canvas.addEventListener('click', function (event) {
             if (!openWidget) {
