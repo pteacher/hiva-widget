@@ -822,9 +822,10 @@
 
         document.addEventListener('mousemove', function (event) {
             if (isDragging && !openWidget) {
-            widgetApp.style.position = 'fixed';
-            widgetApp.style.left = event.clientX - offsetX + 'px';
-            widgetApp.style.top = event.clientY - offsetY + 'px';
+            const left = event.clientX - offsetX;
+            const top = event.clientY - offsetY;
+
+            widgetApp.style.transform = `translate(${left}px, ${top}px)`;
             }
         });
 
