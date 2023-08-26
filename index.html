@@ -799,13 +799,11 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="js/scripts.js"></script>
-<div class="widget-container" style="position: fixed; bottom: 30px; left: 20px; border-radius: 20px; border: none; z-index: 9999;">
-<iframe id="widget-app" src="https://pteacher.github.io/hiva-barsik-widget-en/" title="HIVAWIDGET" width="122"
-        height="172" allowtransparency scrolling="no" seamless allow="microphone"></iframe></div>
+<iframe id="widget-app" style="position: fixed; bottom: 30px; left: 20px; border-radius: 20px; border: none; z-index: 9999;" src="https://pteacher.github.io/hiva-barsik-widget-en/" title="HIVAWIDGET" width="122"
+        height="172" allowtransparency scrolling="no" seamless allow="microphone"></iframe>
 
 <script>
     let widgetApp = document.getElementById('widget-app');
-    let widgetContainer = document.querySelector('.widget-container');
     let openWidget = false;
 
     widgetApp.addEventListener('load', function () {
@@ -819,14 +817,14 @@
                 widgetApp.width = "270px";
                 widgetApp.height = "500px";
                 openWidget = true;
-                widgetContainer.style.border = '4px solid #fff';
+                widgetApp.style.border = '4px solid #fff';
                 widgetApp.contentWindow.blackBackground();
                 widgetApp.contentWindow.sayHello();
             } else {
                 widgetApp.width = "120px";
                 widgetApp.height = "170px";
                 openWidget = false;
-                widgetContainer.style.border = 'none';
+                widgetApp.style.border = 'none';
                 widgetApp.contentWindow.noneBackground();
                 widgetApp.contentWindow.stopRecognize();
             }
@@ -836,45 +834,45 @@
 
             event.stopPropagation();
         });
+
+        // Проверка, что скрипт выполняется на компьютере (не на мобильном устройстве)
+        if (!/Mobi|Android/i.test(navigator.userAgent)) {
+            console.log('loaded drag and drop')
+            let isDragging = false;
+            canvas.addEventListener('mousedown', function (e) {
+                console.log('mousedown')
+                isDragging = true;
+                let startX = widgetApp.clientX;
+                let startY = widgetApp.clientY;
+
+                document.addEventListener('mousemove', onMouseMove);
+                document.addEventListener('mouseup', onMouseUp);
+
+                function onMouseMove(e) {
+                    if (!isDragging) return;
+
+                    let offsetX = widgetApp.clientX - startX;
+                    let offsetY = widgetApp.clientY - startY;
+
+                    let currentX = parseFloat(getComputedStyle(widgetApp).right);
+                    let currentY = parseFloat(getComputedStyle(widgetApp).bottom);
+
+                    widgetApp.style.right = currentX - offsetX + 'px';
+                    widgetApp.style.bottom = currentY - offsetY + 'px';
+
+                    startX = widgetApp.clientX;
+                    startY = widgetApp.clientY;
+                }
+
+                function onMouseUp() {
+                    isDragging = false;
+                    document.removeEventListener('mousemove', onMouseMove);
+                    document.removeEventListener('mouseup', onMouseUp);
+                }
+            });
+        }
     });
 
-    // Проверка, что скрипт выполняется на компьютере (не на мобильном устройстве)
-    if (!/Mobi|Android/i.test(navigator.userAgent)) {
-        console.log('loaded drag and drop')
-        let isDragging = false;
-
-        widgetContainer.addEventListener('mousedown', function (e) {
-            console.log('mousedown')
-            isDragging = true;
-            var startX = e.clientX;
-            var startY = e.clientY;
-
-            document.addEventListener('mousemove', onMouseMove);
-            document.addEventListener('mouseup', onMouseUp);
-
-            function onMouseMove(e) {
-                if (!isDragging) return;
-
-                var offsetX = e.clientX - startX;
-                var offsetY = e.clientY - startY;
-
-                var currentX = parseFloat(getComputedStyle(widgetContainer).right);
-                var currentY = parseFloat(getComputedStyle(widgetContainer).bottom);
-
-                widgetContainer.style.right = currentX - offsetX + 'px';
-                widgetContainer.style.bottom = currentY - offsetY + 'px';
-
-                startX = e.clientX;
-                startY = e.clientY;
-            }
-
-            function onMouseUp() {
-                isDragging = false;
-                document.removeEventListener('mousemove', onMouseMove);
-                document.removeEventListener('mouseup', onMouseUp);
-            }
-        });
-    }
 </script>
 </body>
 </html>
