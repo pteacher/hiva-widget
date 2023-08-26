@@ -809,28 +809,30 @@
     let offsetX, offsetY;
 
     widgetApp.addEventListener('load', function () {
-        console.log('Виджет загрузился');
         const iframeContentWindow = widgetApp.contentWindow;
         const iframeDocument = iframeContentWindow.document;
         const canvas = iframeDocument.querySelector('canvas');
 
         canvas.addEventListener('mousedown', function (event) {
             isDragging = true;
+            console.log('Произошло нажатие');
             offsetX = event.clientX - widgetApp.getBoundingClientRect().left;
             offsetY = event.clientY - widgetApp.getBoundingClientRect().top;
         });
 
         document.addEventListener('mousemove', function (event) {
+            console.log('Перетаскивание элемента');
             if (isDragging && !openWidget) {
-            const left = event.clientX - offsetX;
-            const top = event.clientY - offsetY;
-
-            widgetApp.style.transform = `translate(${left}px, ${top}px)`;
+                console.log('Сработало условие');
+                widgetApp.style.position = 'fixed';
+                widgetApp.style.left = event.clientX - offsetX + 'px';
+                widgetApp.style.top = event.clientY - offsetY + 'px';
             }
         });
 
         document.addEventListener('mouseup', function () {
             isDragging = false;
+            console.log('Произошло отпущение элемента');
         });
 
         canvas.addEventListener('click', function (event) {
