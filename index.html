@@ -805,12 +805,32 @@
 <script>
     let widgetApp = document.getElementById('widget-app');
     let openWidget = false;
+    let isDragging = false;
+    let offsetX, offsetY;
 
     widgetApp.addEventListener('load', function () {
         console.log('Виджет загрузился');
         const iframeContentWindow = widgetApp.contentWindow;
         const iframeDocument = iframeContentWindow.document;
         const canvas = iframeDocument.querySelector('canvas');
+
+        canvas.addEventListener('mousedown', function (event) {
+            isDragging = true;
+            offsetX = event.clientX - widgetApp.getBoundingClientRect().left;
+            offsetY = event.clientY - widgetApp.getBoundingClientRect().top;
+        });
+
+        document.addEventListener('mousemove', function (event) {
+            if (isDragging && !openWidget) {
+            widgetApp.style.position = 'fixed';
+            widgetApp.style.left = event.clientX - offsetX + 'px';
+            widgetApp.style.top = event.clientY - offsetY + 'px';
+            }
+        });
+
+        document.addEventListener('mouseup', function () {
+            isDragging = false;
+        });
 
         canvas.addEventListener('click', function (event) {
             if (!openWidget) {
@@ -834,43 +854,6 @@
 
             event.stopPropagation();
         });
-
-        // Проверка, что скрипт выполняется на компьютере (не на мобильном устройстве)
-        if (!/Mobi|Android/i.test(navigator.userAgent)) {
-            console.log('loaded drag and drop')
-            let isDragging = false;
-            canvas.addEventListener('mousedown', function (e) {
-                console.log('mousedown')
-                isDragging = true;
-                let startX = widgetApp.clientX;
-                let startY = widgetApp.clientY;
-
-                document.addEventListener('mousemove', onMouseMove);
-                document.addEventListener('mouseup', onMouseUp);
-
-                function onMouseMove(e) {
-                    if (!isDragging) return;
-
-                    let offsetX = widgetApp.clientX - startX;
-                    let offsetY = widgetApp.clientY - startY;
-
-                    let currentX = parseFloat(getComputedStyle(widgetApp).right);
-                    let currentY = parseFloat(getComputedStyle(widgetApp).bottom);
-
-                    widgetApp.style.right = currentX - offsetX + 'px';
-                    widgetApp.style.bottom = currentY - offsetY + 'px';
-
-                    startX = widgetApp.clientX;
-                    startY = widgetApp.clientY;
-                }
-
-                function onMouseUp() {
-                    isDragging = false;
-                    document.removeEventListener('mousemove', onMouseMove);
-                    document.removeEventListener('mouseup', onMouseUp);
-                }
-            });
-        }
     });
 
 </script>
