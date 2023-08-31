@@ -799,11 +799,12 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="js/scripts.js"></script>
-<iframe id="widget-app" style="position: fixed; bottom: 30px; left: 20px; border-radius: 20px; border: none; z-index: 9999;" src="https://pteacher.github.io/hiva-barsik-widget-en/" title="HIVAWIDGET" width="122"
+<div id="widget-background" style="position: fixed; top: 0; left: 0; z-index: 999; background-color: black; opacity: 0.5; width: 100vw; height: 100vh; display: none;"></div><iframe id="widget-app" style="position: fixed; bottom: 30px; left: 20px; border-radius: 20px; border: none; z-index: 9999;" src="https://pteacher.github.io/hiva-barsik-widget-en/" title="HIVAWIDGET" width="122"
         height="172" allowtransparency scrolling="no" seamless allow="microphone"></iframe>
 
 <script>
     let widgetApp = document.getElementById('widget-app');
+    let widgetBackground = document.getElementById('widget-background');
     let openWidget = false;
     let isDragging = false;
     let offsetX, offsetY;
@@ -840,16 +841,14 @@
                 widgetApp.width = "270px";
                 widgetApp.height = "500px";
                 openWidget = true;
-                widgetApp.style.border = '4px solid #fff';
-                widgetApp.contentWindow.blackBackground();
                 widgetApp.contentWindow.sayHello();
+                widgetBackground.style.display = "block";
             } else {
                 widgetApp.width = "120px";
                 widgetApp.height = "170px";
                 openWidget = false;
-                widgetApp.style.border = 'none';
-                widgetApp.contentWindow.noneBackground();
                 widgetApp.contentWindow.stopRecognize();
+                widgetBackground.style.display = "none";
             }
 
             widgetApp.contentWindow.document.body.style.width = widgetApp.width;
