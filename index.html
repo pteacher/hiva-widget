@@ -838,7 +838,7 @@
 
         canvas.addEventListener('click', function (event) {
             if (!openWidget) {
-                if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                if (window.innerWidth < 600) {
                     widgetApp.width = "calc(50% - 130px)";
                 } else {
                     widgetApp.width = "260px";
@@ -853,7 +853,7 @@
                 widgetApp.height = "170px";
                 openWidget = false;
                 widgetApp.contentWindow.stopRecognize();
-                widgetApp.contentWindow.stopRecognize();
+                widgetApp.contentWindow.clearAfterClose();
                 widgetBackground.style.display = "none";
             }
 
