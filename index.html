@@ -838,10 +838,11 @@
 
         canvas.addEventListener('click', function (event) {
             if (!openWidget) {
+                widgetApp.width = "260px";
                 if (window.innerWidth < 600) {
-                    widgetApp.width = "calc(50% - 130px)";
+                    widgetApp.style.left = "calc(50% - 130px)";
                 } else {
-                    widgetApp.width = "260px";
+                    widgetApp.style.left = "20px";
                 }
                 
                 widgetApp.height = "500px";
