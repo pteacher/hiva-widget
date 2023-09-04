@@ -799,7 +799,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <!-- Core theme JS-->
 <script src="js/scripts.js"></script>
-<div id="widget-background" style="position: fixed; top: 0; left: 0; z-index: 999; background-color: black; opacity: 0.5; width: 100vw; height: 100vh; display: none;"></div><iframe id="widget-app" style="position: fixed; bottom: 30px; left: 20px; border-radius: 20px; border: none; z-index: 9999;" src="https://pteacher.github.io/hiva-barsik-widget-en/" title="HIVAWIDGET" width="122"
+<div id="widget-background" style="position: fixed; top: 0; left: 0; z-index: 999; background-color: black; opacity: 0.7; width: 100vw; height: 100vh; display: none;"></div><iframe id="widget-app" style="position: fixed; bottom: 30px; left: 20px; border-radius: 20px; border: none; z-index: 9999;" src="https://pteacher.github.io/hiva-barsik-widget-en/" title="HIVAWIDGET" width="122"
         height="172" allowtransparency scrolling="no" seamless allow="microphone"></iframe>
 
 <script>
@@ -838,7 +838,12 @@
 
         canvas.addEventListener('click', function (event) {
             if (!openWidget) {
-                widgetApp.width = "270px";
+                if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+                    widgetApp.width = "calc(50% - 130px)";
+                } else {
+                    widgetApp.width = "260px";
+                }
+                
                 widgetApp.height = "500px";
                 openWidget = true;
                 widgetApp.contentWindow.sayHello();
@@ -847,6 +852,7 @@
                 widgetApp.width = "120px";
                 widgetApp.height = "170px";
                 openWidget = false;
+                widgetApp.contentWindow.stopRecognize();
                 widgetApp.contentWindow.stopRecognize();
                 widgetBackground.style.display = "none";
             }
