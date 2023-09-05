@@ -839,10 +839,10 @@
         canvas.addEventListener('click', function (event) {
             if (!openWidget) {
                 widgetApp.width = "260px";
+
                 if (window.innerWidth < 600) {
                     widgetApp.style.left = "calc(50% - 130px)";
-                } else {
-                    widgetApp.style.left = "20px";
+                    widgetApp.style.bottom = "50px";
                 }
                 
                 widgetApp.height = "500px";
@@ -851,6 +851,12 @@
                 widgetBackground.style.display = "block";
             } else {
                 widgetApp.width = "120px";
+
+                if (window.innerWidth < 600) {
+                    widgetApp.style.left = "20px";
+                    widgetApp.style.bottom = "30px";
+                }
+
                 widgetApp.height = "170px";
                 openWidget = false;
                 widgetApp.contentWindow.stopRecognize();
